@@ -616,13 +616,12 @@ local function ImproveAmbulanceNavigation()
             
             -- Give a significant speed boost to ensure it can get over hills
             SetVehicleForwardSpeed(medicVehicle, 15.0)
-            
-            -- Task the driver to get to the player's nearest road node
+              -- Task the driver to get to the player's nearest road node
             TaskVehicleDriveToCoordLongrange(medicPed, medicVehicle, 
                 roadPos.x, roadPos.y, roadPos.z, 
                 35.0, drivingStyle, 15.0)
                 
-            print("Improved ambulance navigation - distance to player: " .. distance)
+            DebugLog("Improved ambulance navigation - distance to player: " .. distance)
         end
     end
 end
@@ -633,7 +632,7 @@ local function FixedWalkToPlayer()
     ClearPedTasksImmediately(medicPed)
     TaskGoToEntity(medicPed, playerPed, -1, 1.0, 2.0, 0, 0)
     Notify(Config.Notifications.MedicArrived, "success")
-    print("Medic is walking to player normally without aiming")
+    DebugLog("Medic is walking to player normally without aiming")
 end
 
 -- Register a command for testing/fixing ambulance navigation
@@ -643,16 +642,6 @@ RegisterCommand('fixambulance', function()
         Notify("Attempting to fix ambulance navigation", "primary")
     else
         Notify("No active ambulance to fix", "error")
-    end
-end, false)
-
--- Mail command that player can use to send themselves a test mail
-RegisterCommand('medicbill', function(source, args)
-    local player = QBCore.Functions.GetPlayerData()
-    if player then
-        local amount = args[1] or Config.ReviveCost
-        TriggerServerEvent('mns-aimedic:server:SendTestMail', tonumber(amount))
-        Notify("Requesting test medical bill email...", "primary")
     end
 end, false)
 

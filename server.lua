@@ -1,5 +1,12 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+-- Debug logging function
+local function DebugLog(message)
+    if Config.Debug then
+        print("[MNS-AIMedic] " .. message)
+    end
+end
+
 -- Process payment for revive (no email)
 RegisterNetEvent('mns-aimedic:server:PayForRevive', function(amount)
     local src = source
@@ -16,11 +23,11 @@ RegisterNetEvent('mns-aimedic:server:PayForRevive', function(amount)
             
             -- Send success callback to client
             TriggerClientEvent('mns-aimedic:client:PaymentProcessed', src, true, amount)
-            print("Server: Player " .. src .. " paid $" .. amount .. " for medical services")
+            DebugLog("Player " .. src .. " paid $" .. amount .. " for medical services")
         else
             -- Not enough money
             TriggerClientEvent('mns-aimedic:client:PaymentProcessed', src, false, amount)
-            print("Server: Player " .. src .. " does not have enough money for medical services")
+            DebugLog("Player " .. src .. " does not have enough money for medical services")
         end
     end
 end)

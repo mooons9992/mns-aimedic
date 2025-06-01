@@ -12,7 +12,7 @@ Config.UseOxLibNotifications = true -- Enable ox_lib notifications
 
 -- AI Medic Settings
 Config.MedicModel = 's_m_m_paramedic_01' -- Paramedic ped model instead of FBI agent
-Config.MedicVehicle = 'ambulance' -- Vehicle model for medic
+Config.MedicVehicle = 'f450ambo' -- Vehicle model for medic
 Config.ReviveCost = 100 -- Cost to revive player
 Config.RequiresCash = false -- If true, player needs money to be revived
 Config.MedicTimeout = 60000 -- Timeout in ms between AI medic calls (60 seconds)
